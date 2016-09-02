@@ -9,13 +9,14 @@ from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
 
 # Create your views here.
-
+access_token = 'EAAWkem72GcIBAOMF4AUYuZBkakT3arZBDkKL5RhTqzmjV1CRoGOkCLzEPmovAUh7UEdzdcSMsOs1uFcVkkL5XMYbkGI0YwFjWgVksgZBJA9hBOWIcKCTkLtJgR1NlI7SZCnuRfJgAFxJM2lw4GZBlVhAGnBYhbnp1LJ2uVZB6XJwZDZD'
+verify_token = '8510865767'
 #url = 'http://api.wordnik.com:80/v4/word.json/tycoon/definitions?limit=200&includeRelated=true&useCanonical=false&includeTags=false&api_key=a2a73e7b926c924fad7001ca3111acd55af2ffabf50eb4ae5'
 def get_meaning(fbid, recieved_message):
-	url = 'http://api.wordnik.com:80/v4/word.json/' + recieved_message + '/definitions?limit=200&includeRelated=true&useCanonical=false&includeTags=false&api_key=a2a73e7b926c924fad7001ca3111acd55af2ffabf50eb4ae5'
-	r = requests.get(url)
-	data = json.loads(r.text)
-	post_message_url = 'https://graph.facebook.com/v2.6/me/messages?access_token=%s'% access_token
+    url = 'http://api.wordnik.com:80/v4/word.json/' + recieved_message + '/definitions?limit=200&includeRelated=true&useCanonical=false&includeTags=false&api_key=a2a73e7b926c924fad7001ca3111acd55af2ffabf50eb4ae5'
+    r = requests.get(url)
+    data = json.loads(r.text)
+    post_message_url = 'https://graph.facebook.com/v2.6/me/messages?access_token=%s'% access_token
     response_msg = json.dumps({"recipient":{"id":fbid}, "message":{"text":data}})
     status = requests.post(post_message_url, headers={"Content-Type": "application/json"},data=response_msg)
     pprint(status.json())
