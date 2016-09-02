@@ -18,7 +18,7 @@ def get_meaning(fbid, recieved_message):
     data = json.loads(r.text)
     final_data = str(data[0]["text"])
     post_message_url = 'https://graph.facebook.com/v2.6/me/messages?access_token=%s'% access_token
-    response_msg = json.dumps({"recipient":{"id":fbid}, "message":{"text":data}})
+    response_msg = json.dumps({"recipient":{"id":fbid}, "message":{"text":final_data}})
     status = requests.post(post_message_url, headers={"Content-Type": "application/json"},data=response_msg)
     pprint(status.json())
 
