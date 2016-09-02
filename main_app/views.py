@@ -14,11 +14,10 @@ verify_token = '8510865767'
 #url = 'http://api.wordnik.com:80/v4/word.json/tycoon/definitions?limit=200&includeRelated=true&useCanonical=false&includeTags=false&api_key=a2a73e7b926c924fad7001ca3111acd55af2ffabf50eb4ae5'
 def get_meaning(fbid, recieved_message):
     url = 'http://api.wordnik.com:80/v4/word.json/' + recieved_message + '/definitions?limit=200&includeRelated=true&useCanonical=false&includeTags=false&api_key=a2a73e7b926c924fad7001ca3111acd55af2ffabf50eb4ae5'
-    r = requests.get(url)
-    data = json.loads(r.text)[0]
-    final_data = str(data["text"])
+    r = requests.get(url).json()[0]["text"]
+    fdata = str(r)
     post_message_url = 'https://graph.facebook.com/v2.6/me/messages?access_token=%s'% access_token
-    response_msg = json.dumps({"recipient":{"id":fbid}, "message":{"text":final_data}})
+    response_msg = json.dumps({"recipient":{"id":fbid}, "message":{"text":fdata}})
     status = requests.post(post_message_url, headers={"Content-Type": "application/json"},data=response_msg)
     pprint(status.json())
 
