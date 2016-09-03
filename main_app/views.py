@@ -13,7 +13,7 @@ access_token = 'EAAWkem72GcIBAOMF4AUYuZBkakT3arZBDkKL5RhTqzmjV1CRoGOkCLzEPmovAUh
 verify_token = '8510865767'
 #url = 'http://api.wordnik.com:80/v4/word.json/tycoon/definitions?limit=200&includeRelated=true&useCanonical=false&includeTags=false&api_key=a2a73e7b926c924fad7001ca3111acd55af2ffabf50eb4ae5'
 def get_meaning(fbid, recieved_message):
-    url = 'http://api.wordnik.com:80/v4/word.json/' + recieved_message + '/definitions?limit=200&includeRelated=true&useCanonical=false&includeTags=false&api_key=a2a73e7b926c924fad7001ca3111acd55af2ffabf50eb4ae5'
+    url = 'http://api.wordnik.com:80/v4/word.json/' + recieved_message.lower() + '/definitions?limit=200&includeRelated=true&useCanonical=false&includeTags=false&api_key=a2a73e7b926c924fad7001ca3111acd55af2ffabf50eb4ae5'
     try:
         r = requests.get(url).json()[0]["text"]
         fdata = str(r)
