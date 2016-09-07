@@ -50,9 +50,9 @@ class dictbot(generic.View):
                 if 'message' in message: 
                     try:  
                         get_meaning(message['sender']['id'], message['message']['text'])
-                        send_yo()
+                        #send_yo()
                     except Exception as e:
                         print e
                         get_meaning(message['sender']['id'], 'Please send a valid text.')    
-                        send_yo()
+                        #send_yo()
         return HttpResponse()
